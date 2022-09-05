@@ -6,6 +6,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import * as jwtConfig from '../config/middleware/jwtAuth';
 import AuthRouter from './AuthRouter';
 import UserRouter from './UserRouter';
+import MealRouter from './MealRouter';
 
 const swaggerDef = require('../../swaggerDef');
 
@@ -23,6 +24,14 @@ export function init(app: express.Application): void {
      * @constructs
      */
     app.use('/v1/users', jwtConfig.isAuthenticated, UserRouter);
+
+    /**
+     * @description
+     *  Forwards any requests to the /v1/meals URI to our MealRouter
+     *  Also, check if user authenticated
+     * @constructs
+     */
+    app.use('/v1/meals', jwtConfig.isAuthenticated, MealRouter);
 
     /**
      * @description Forwards any requests to the /auth URI to our AuthRouter

@@ -82,7 +82,7 @@ const UserService: IUserService = {
      */
     async remove(id: string): Promise < IUserModel > {
         try {
-            const validate: Joi.ValidationResult = UserValidation.removeUser({
+            const validate: Joi.ValidationResult = UserValidation.getUser({
                 id,
             });
 

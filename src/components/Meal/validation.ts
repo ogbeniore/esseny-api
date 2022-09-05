@@ -1,34 +1,35 @@
 import * as Joi from 'joi';
 import Validation from '../validation';
-import { IUserModel } from './model';
+import { IMealModel } from './model';
 
 /**
  * @export
- * @class UserValidation
+ * @class MealValidation
  * @extends Validation
  */
-class UserValidation extends Validation {
+
+class MealValidation extends Validation {
     /**
-     * Creates an instance of UserValidation.
-     * @memberof UserValidation
+     * Creates an instance of MealValidation.
+     * @memberof MealValidation
      */
     constructor() {
         super();
     }
 
     /**
-     * @param {IUserModel} params
+     * @param {IMealModel} body
      * @returns {Joi.ValidationResult}
-     * @memberof UserValidation
+     * @memberof MealValidation
      */
-    createUser(
-        params: IUserModel,
+    createMeal(
+        params: IMealModel,
     ): Joi.ValidationResult {
         const schema: Joi.Schema = Joi.object().keys({
             name: Joi.string().required(),
-            email: Joi.string().email({
-                minDomainSegments: 2,
-            }).required(),
+            timeToTable: Joi.number().required(),
+            mode: Joi.string().required(),
+            cost: Joi.number(),
         });
 
         return schema.validate(params);
@@ -37,9 +38,9 @@ class UserValidation extends Validation {
     /**
      * @param {{ id: string }} body
      * @returns {Joi.ValidationResult<{ id: string }>}
-     * @memberof UserValidation
+     * @memberof MealValidation
      */
-    getUser(
+    getMeal(
         body: {
             id: string
         },
@@ -52,4 +53,4 @@ class UserValidation extends Validation {
     }
 }
 
-export default new UserValidation();
+export default new MealValidation();
